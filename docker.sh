@@ -1,7 +1,6 @@
 #!/bin/bash
 
-IMAGE=dizzyuk/aoc:v3
-#$(git log -n 1 --pretty=format:%h -- docker/Dockerfile docker/entrypoint.ps1)
+IMAGE=dizzyuk/aoc:v4
 
 docker image inspect $IMAGE >/dev/null 2>&1
 if [ $? -ne 0 ]
@@ -12,5 +11,4 @@ then
     cd ..
 fi
 
-#docker run --rm -it -v $(pwd):/code $IMAGE /entrypoint.ps1 $@
 docker run --rm -it -v $(pwd):/code $IMAGE /entrypoint.sh $@
