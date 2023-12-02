@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE=dizzyuk/aoc:v1
+IMAGE=dizzyuk/aoc:v2
 #$(git log -n 1 --pretty=format:%h -- docker/Dockerfile docker/entrypoint.ps1)
 
 docker image inspect $IMAGE >/dev/null 2>&1
