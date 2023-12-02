@@ -47,7 +47,7 @@ foreach ($gameplayed in $matchinput.GetEnumerator()) {
     }
 }
 
-$legalcount
+$legalcount | Out-String
 
 ###############
 
