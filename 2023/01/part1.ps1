@@ -1,8 +1,8 @@
-$input = get-content ".\input.txt"
+$inputtxt = get-content ".\input.txt"
 
 $totalcount = 0
 
-foreach ($line in $input) {
+foreach ($line in $inputtxt) {
     $digits = ($line | select-string -pattern '\d' -AllMatches)
     $firstdigit = $digits.matches[0].Value
     $lastdigit = $digits.matches[-1].Value
