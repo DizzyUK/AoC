@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE=dizzyuk/aoc:v4
+IMAGE=dizzyuk/aoc:v5
 
 docker image inspect $IMAGE >/dev/null 2>&1
 if [ $? -ne 0 ]
