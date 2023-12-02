@@ -1,56 +1,55 @@
 $inputtxt = get-content ".\input.txt"
 
-#Part1
+#Rules
 
-$totalcount = 0
+$redrule = 12
+$greenrule = 13
+$bluerule = 14
 
-foreach ($line in $inputtxt) {
-    $digits = ($line | select-string -pattern '\d' -AllMatches)
-    $firstdigit = $digits.matches[0].Value
-    $lastdigit = $digits.matches[-1].Value
-    [int]$fullnumber = $firstdigit + $lastdigit
-    $totalcount += $fullnumber
+#Parse Puzzle Input
+
+$matchinput = @{}
+
+foreach ($game in $inputtxt) {
+    [int]$gameno = $game.split(':')[0].split(' ')[1]
+    $sets = $game.split(':')[1].split(';')
+    $gamecubes = @{}
+    $setno = 0
+    foreach ($set in $sets) {
+        $set = $set.split(',').trim()
+        $setcubes = @{}
+        foreach($cubegrp in $set) {
+            $grpsplit = $cubegrp.split(' ')
+            $setcubes.add($grpsplit[1],[int]$grpsplit[0])
+        }
+        
+        $gamecubes.add($setno,$setcubes)
+        $setno++
+    }
+    $matchinput.add($gameno,$gamecubes)
 }
 
-write-host "$totalcount"
 
+#### Part1 ####
+$legalcount = 0
+foreach ($gameplayed in $matchinput.GetEnumerator()) {
 
+    $matchlegal = $true
 
-#Part2
-
-$totalcount = 0
-
-foreach ($line in $inputtxt) {
-    $digits = ($line | select-string -pattern '(?=(\d|one|two|three|four|five|six|seven|eight|nine))' -AllMatches)
-    [string]$firstdigit = $digits.matches[0].groups[1].Value
-    [string]$lastdigit = $digits.matches[-1].groups[1].Value
-
-    switch ($firstdigit){
-        'one' {$firstdigit = 1}
-        'two' {$firstdigit = 2}
-        'three' {$firstdigit = 3}
-        'four' {$firstdigit = 4}
-        'five' {$firstdigit = 5}
-        'six' {$firstdigit = 6}
-        'seven' {$firstdigit = 7}
-        'eight' {$firstdigit = 8}
-        'nine' {$firstdigit = 9}
-    }
-    
-    switch ($lastdigit){
-        'one' {$lastdigit = 1}
-        'two' {$lastdigit= 2}
-        'three' {$lastdigit = 3}
-        'four' {$lastdigit = 4}
-        'five' {$lastdigit = 5}
-        'six' {$lastdigit = 6}
-        'seven' {$lastdigit = 7}
-        'eight' {$lastdigit = 8}
-        'nine' {$lastdigit = 9}
+    foreach ($setplayed in $gameplayed.Value.values) {
+        if (($setplayed.red -gt $redrule) -or ($setplayed.blue -gt $bluerule) -or ($setplayed.green -gt $greenrule)) {
+            $matchlegal = $false
+        }
     }
 
-    [int]$fullnumber = [string]$firstdigit + [string]$lastdigit
-    $totalcount += [int]$fullnumber
+    if ($matchlegal -eq $true) {
+        $legalcount += $gameplayed.name
+    }
 }
 
-write-host "$totalcount"
+$legalcount
+
+###############
+
+#### Part2 ####
+
