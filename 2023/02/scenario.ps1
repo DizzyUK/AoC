@@ -47,7 +47,7 @@ foreach ($gameplayed in $matchinput.GetEnumerator()) {
     }
 }
 
-$legalcount
+write-host "Part 1: $legalcount"
 
 ###############
 
@@ -66,4 +66,4 @@ foreach ($gameplayed in $matchinput.GetEnumerator()) {
     $gamecubepwr = $highestblue * $highestred * $highestgreen
     $totalcubepower += $gamecubepwr
 }
-$totalcubepower
+write-host "Part 2: $totalcubepower"

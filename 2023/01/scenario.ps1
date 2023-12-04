@@ -12,7 +12,7 @@ foreach ($line in $inputtxt) {
     $totalcount += $fullnumber
 }
 
-write-host "$totalcount"
+write-host "Part 1: $totalcount"
 
 
 
@@ -53,4 +53,4 @@ foreach ($line in $inputtxt) {
     $totalcount += [int]$fullnumber
 }
 
-write-host "$totalcount"
+write-host "Part 2: $totalcount"

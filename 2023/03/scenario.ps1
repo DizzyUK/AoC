@@ -79,7 +79,7 @@ foreach ($char in $specs) {
     }
 }
 
-$foundnumber
+write-host "Part 1: $foundnumber"
 
 
 
@@ -110,4 +110,4 @@ foreach ($char in $specs) {
     }
 }
 
-$totalgearratio
+write-host "Part 2: $totalgearratio"
