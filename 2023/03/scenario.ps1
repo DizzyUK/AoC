@@ -77,20 +77,37 @@ foreach ($char in $specs) {
             }
         }
     }
-
-
-
-    <#
-    foreach ($neighbour in $neighbours) {
-        foreach ($number in $numbers) {
-            if (($number.values -contains $neighbour) -and ($foundnosperchar -notcontains $number.keys)) {
-                [void]$foundnosperchar.add($number.keys)
-            }
-        }
-    }
-    [void]$foundnumbers.Add($foundnosperchar)
-
-    #>
 }
 
 $foundnumber
+
+
+
+
+#Day2#
+$totalgearratio = 0
+
+foreach ($char in $specs) {
+
+    Remove-Variable gearnos -ErrorAction SilentlyContinue
+    $gearnos = New-Object System.Collections.ArrayList
+
+    $neighbours = get-neighbours -startposition $($char.values)
+
+    foreach ($number in $numbers) {
+        foreach ($neighbour in $neighbours) {
+            if ($number.values.contains($neighbour)) {
+
+                [void]$gearnos.add([int]"$($number.keys)")
+                break
+            }
+        }
+    }
+
+    if ($gearnos.count -eq 2) {
+        $gearratio = $gearnos[0] * $gearnos[1]
+        $totalgearratio += $gearratio
+    }
+}
+
+$totalgearratio
