@@ -20,7 +20,7 @@ foreach ($card in $inputtxt) {
     $totalpoints += $cardscore 
 }
 
-$totalpoints
+write-host "Part 1: $totalpoints"
 
 #part2#
 
@@ -61,4 +61,4 @@ foreach ($card in $cardarray) {
     $cardcounttotal += $card.cardcount
 }
 
-$cardcounttotal
+write-host "Part 2: $cardcounttotal"
