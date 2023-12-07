@@ -5,7 +5,6 @@ image: mcr.microsoft.com/powershell
 code: /code
 workdir: /code/%year%/%zeroday%
 cmd: pwsh -command ./scenario.ps1
-runonce: python3 -m compileall
 daypath: %year%/%zeroday%
 inputfile: %year%/%zeroday%/input.txt
 answerfile: %year%/%zeroday%/answer.txt
