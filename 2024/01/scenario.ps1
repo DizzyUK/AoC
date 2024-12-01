@@ -5,9 +5,9 @@ $inputTxt = get-content ".\input.txt"
 $leftList = @()
 $rightList = @()
 foreach ($line in $inputTxt) {
-    $leftValue,$rightValue = ($line | select-string -pattern '(\d+)' -AllMatches).matches.value
-    $leftList += [int]$leftValue
-    $rightList += [int]$rightValue
+    $lineSplit = ($line.split('',[System.StringSplitOptions]::RemoveEmptyEntries))
+    $leftList += [int]$lineSplit[0]
+    $rightList += [int]$lineSplit[1]
 }
 
 $leftList = $leftList | sort-object
@@ -16,8 +16,7 @@ $rightList = $rightList | sort-object
 $runningTotal = 0
 $index = 0
 do {
-    if ($leftList[$index] -gt $rightList[$index]) {$runningTotal += ($leftList[$index] - $rightList[$index])}
-    if ($leftList[$index] -lt $rightList[$index]) {$runningTotal += ($rightList[$index] - $leftList[$index])}
+    $runningTotal += [Math]::Abs($leftList[$index] - $rightList[$index])
     $index++
 } until ($index -eq $leftList.length)
 
