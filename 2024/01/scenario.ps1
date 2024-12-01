@@ -4,12 +4,10 @@ $inputTxt = get-content ".\input.txt"
 
 $leftList = @()
 $rightList = @()
-
 foreach ($line in $inputTxt) {
     $leftValue,$rightValue = ($line | select-string -pattern '(\d+)' -AllMatches).matches.value
     $leftList += [int]$leftValue
     $rightList += [int]$rightValue
-
 }
 
 $leftList = $leftList | sort-object
@@ -29,7 +27,6 @@ write-host "Part 1: $runningTotal"
 
 $listSimilarity = 0
 $counts = @{}
-
 foreach ($item in $rightList) {
     if ($counts.ContainsKey($item)) {
         $counts[$item]++
