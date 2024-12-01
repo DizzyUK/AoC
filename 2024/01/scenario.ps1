@@ -7,8 +7,8 @@ $rightList = @()
 
 foreach ($line in $inputTxt) {
     $leftValue,$rightValue = ($line | select-string -pattern '(\d+)' -AllMatches).matches.value
-    $leftList += $leftValue
-    $rightList += $rightValue
+    $leftList += [int]$leftValue
+    $rightList += [int]$rightValue
 
 }
 
@@ -25,10 +25,14 @@ do {
 
 write-host "Part 1: $runningTotal"
 
-
-
 #Part2
 
-#$totalcount = 0
+$listSimilarity = 0
 
-#write-host "Part 2: $totalcount"
+foreach ($line in $leftList) {
+    $rightMatches = $rightList | Where-Object {$_ -eq $line}
+    $lineSimilarity = $line * $rightMatches.count
+    $listSimilarity += $lineSimilarity
+}
+
+write-host "Part 2: $listSimilarity"
