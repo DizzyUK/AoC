@@ -28,11 +28,20 @@ write-host "Part 1: $runningTotal"
 #Part2
 
 $listSimilarity = 0
+$counts = @{}
+
+foreach ($item in $rightList) {
+    if ($counts.ContainsKey($item)) {
+        $counts[$item]++
+    } else {
+        $counts[$item] = 1
+    }
+}
 
 foreach ($line in $leftList) {
-    $rightMatches = $rightList | Where-Object {$_ -eq $line}
-    $lineSimilarity = $line * $rightMatches.count
-    $listSimilarity += $lineSimilarity
+    if ($counts.ContainsKey($line)) {
+        $listSimilarity += ($line * $counts.$line)
+    }
 }
 
 write-host "Part 2: $listSimilarity"
