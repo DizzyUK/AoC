@@ -61,4 +61,4 @@ foreach ($line in $inputTxt) {
     }
 }
 
-write-host "Part 2: $advgoodCounter"
+write-host "Part 2: $advGoodCounter"
