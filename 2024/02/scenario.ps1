@@ -52,12 +52,14 @@ foreach ($line in $inputTxt) {
         continue
     }
     else {
-        for ($i = 0; $i -lt $readings.count; $i++) {
+        $i = 0
+        do {
             if (test-linesafety ($readings | where-object {$readings.IndexOf($_) -ne $i})) {
                 $advGoodCounter++
                 break
             }
-        }
+            $i++
+        } until ($i -ge $readings.count)
     }
 }
 
