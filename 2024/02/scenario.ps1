@@ -54,7 +54,10 @@ foreach ($line in $inputTxt) {
     else {
         $i = 0
         do {
-            if (test-linesafety ($readings | where-object {$readings.IndexOf($_) -ne $i})) {
+            if ($i -eq 0) {$tempReadings = $readings[1..($readings.count - 1)] }
+            elseif (($i -gt 0) -and ($i -lt ($readings.count - 1))) {$tempReadings = $readings[0..($i - 1)] + $readings[($i + 1)..($readings.count - 1)]}
+            else {$tempReadings = $readings[0..($readings.count -2)]}
+            if (test-linesafety $tempReadings) {
                 $advGoodCounter++
                 break
             }
