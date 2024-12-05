@@ -54,5 +54,24 @@ write-host "Part 1: $part1"
 
 #Part2
 
+$inputTxt = get-content ".\input.txt"
 
-#write-host "Part 2: $part2"
+$part2 = 0
+for ($y = 0; ($y -lt ($inputTxt.count-1)) ; $y++) {
+    for ($x = 0; ($x -lt ($inputTxt[$y].length -1)); $x++) {
+        if ($inputTxt[$y][$x] -eq 'A') {
+
+            if (($x -ge 1) -and ($y -ge 1) -and (($x+1) -lt $inputTxt[$y].length) -and (($y+1) -lt ($inputTxt.count))) {
+                $topLeftLetter = $inputTxt[($y -1)][($x -1)]
+                $topRightLetter = $inputTxt[($y-1)][($x+1)]
+                $bottomRightLetter = $inputTxt[($y+1)][($x+1)]
+                $bottomLeftLetter = $inputTxt[($y+1)][($x-1)]
+                if (((($topLeftLetter -eq "M") -and ($bottomRightLetter -eq "S")) -or ((($topLeftLetter -eq "S") -and ($bottomRightLetter -eq "M")))) -and ((($topRightLetter -eq "M") -and ($bottomLeftLetter -eq "S")) -or (($topRightLetter -eq "S") -and ($bottomLeftLetter -eq "M")))) {
+                    $part2++
+                }
+            }
+        }
+    }
+}
+
+write-host "Part 2: $part2"
