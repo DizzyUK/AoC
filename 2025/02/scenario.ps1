@@ -32,6 +32,7 @@ write-host "Part 1: $invalidIDs"
 
 #Part2
 [int64]$invalidIDsPt2 = 0
+
 foreach ($line in $lines) {
     [int64]$i,[int64]$sequenceEnd = (([regex]::Matches($line, '\d+')).value)
     do {
