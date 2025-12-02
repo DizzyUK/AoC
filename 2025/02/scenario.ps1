@@ -1,4 +1,5 @@
 $inputTxt = get-content ".\input.txt"
+$lines = $inputTxt.split(',')
 
 function split-matchno {
     param(
@@ -17,7 +18,6 @@ function split-matchno {
 
 
 #Part1
-$lines = $inputTxt.split(',')
 [int64]$invalidIDs = 0
 
 foreach ($line in $lines) {
@@ -31,5 +31,13 @@ foreach ($line in $lines) {
 write-host "Part 1: $invalidIDs"
 
 #Part2
+[int64]$invalidIDsPt2 = 0
+foreach ($line in $lines) {
+    [int64]$i,[int64]$sequenceEnd = (([regex]::Matches($line, '\d+')).value)
+    do {
+        if (([regex]::Matches($i, '^(\d+)\1+$')).value) {$invalidIDsPt2 += $i}
+        $i++
+    } until ($i -gt $sequenceEnd)
+}
 
-
+write-host "Part 2: $invalidIDsPt2"
