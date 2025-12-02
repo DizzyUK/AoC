@@ -8,3 +8,4 @@ cmd: pwsh -command ./scenario.ps1
 daypath: %year%/%zeroday%
 inputfile: %year%/%zeroday%/input.txt
 answerfile: %year%/%zeroday%/answer.txt
+notty: true
