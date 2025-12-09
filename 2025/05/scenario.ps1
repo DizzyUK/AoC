@@ -1,5 +1,4 @@
 $inputTxt = get-content ".\input.txt"
-#$inputTxt = get-content ".\example.txt"
 
 $blankIndex = $inputTxt.IndexOf("")
 
@@ -45,5 +44,9 @@ write-host "Part 1: $freshCount"
 
 #Part2
 
+$pt2Count = 0
+foreach ($range in $freshList) {
+    $pt2Count += ($range.max - $range.min) +1
+}
 
-#write-host "Part 2: $pt2RollsCount"
+write-host "Part 2: $pt2Count"
