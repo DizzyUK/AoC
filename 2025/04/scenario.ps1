@@ -1,5 +1,4 @@
 $inputTxt = get-content ".\input.txt"
-#$inputTxt = get-content ".\example.txt"
 
 #Part1
 
@@ -22,17 +21,6 @@ function check-neighbours {
             }
         }
     }
-
-    # $topLeft = ($flatGrid| where-object {($_.x -eq ($inputX -1)) -and ($_.y -eq ($inputY - 1))}).contents
-    # $topMid = ($flatGrid| where-object {($_.x -eq ($inputX)) -and ($_.y -eq ($inputY - 1))}).contents
-    # $topRight = ($flatGrid| where-object {($_.x -eq ($inputX +1)) -and ($_.y -eq ($inputY - 1))}).contents
-    # $midLeft = ($flatGrid| where-object {($_.x -eq ($inputX -1)) -and ($_.y -eq ($inputY))}).contents
-    # $midRight = ($flatGrid| where-object {($_.x -eq ($inputX +1)) -and ($_.y -eq ($inputY))}).contents
-    # $bottomLeft = ($flatGrid| where-object {($_.x -eq ($inputX -1)) -and ($_.y -eq ($inputY + 1))}).contents
-    # $bottomMid = ($flatGrid| where-object {($_.x -eq ($inputX)) -and ($_.y -eq ($inputY + 1))}).contents
-    # $bottomRight = ($flatGrid| where-object {($_.x -eq ($inputX + 1)) -and ($_.y -eq ($inputY + 1))}).contents
-    # $countVars = @($topLeft, $topMid, $topRight, $midLeft, $midRight, $bottomLeft, $bottomMid, $bottomRight)
-    # $count = ($countVars | where-object {$_ -eq "@"}).Count
     return $count
 }
 
@@ -65,4 +53,18 @@ foreach ($gridLoc in $flatgrid) {
 
 write-host "Part 1: $rollsCount"
 
+#Part2
+$pt2RollsCount = 0
+do {
+    $loopDif = $pt2RollsCount
+    foreach ($gridLoc in $flatgrid) {
+        if ($gridLoc.contents -eq "@") {
+            if ((check-neighbours -grid $gridLayout -inputX $($gridLoc.x) -inputY $($gridLoc.y)) -le 3) {
+                $gridLoc.contents = "x"
+                $pt2RollsCount++
+            }
+        }
+    }
+} until (($pt2RollsCount - $loopDif) -eq 0)
 
+write-host "Part 2: $pt2RollsCount"
